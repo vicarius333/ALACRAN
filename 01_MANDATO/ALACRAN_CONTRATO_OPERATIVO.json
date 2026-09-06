@@ -1,0 +1,37 @@
+{
+  "id": "ALACRAN_CONTRATO_OPERATIVO_V1",
+  "objetivo": "Recorrer el corpus biblico siguiendo la estructura de la Biblia Fractal y producir hallazgos auditables.",
+  "entrada": "CORPUS_BIBLICO",
+  "salida": "REGISTRO_DE_HALLAZGOS",
+  "orden_de_procesamiento": [
+    "BIBLIA",
+    "BLOQUE",
+    "LIBRO",
+    "CAPITULO",
+    "UNIDAD",
+    "ELEMENTO",
+    "PALABRA",
+    "RAIZ",
+    "LETRA_OPERADOR"
+  ],
+  "operaciones": [
+    "EXTRAER",
+    "NORMALIZAR",
+    "RELACIONAR",
+    "COMPARAR",
+    "DETECTAR_RECURRENCIA",
+    "DETECTAR_TRANSFORMACION",
+    "DETECTAR_AUSENCIA",
+    "VALIDAR",
+    "REGISTRAR"
+  ],
+  "restricciones": [
+    "NO_IMPONER_UNIDADES_TEXTUALES",
+    "NO_CONFUNDIR_PATRON_CON_INTERPRETACION",
+    "NO_ELEVAR_HIPOTESIS_A_HECHO",
+    "CONSERVAR_REFERENCIA_EXACTA_AL_CORPUS",
+    "REGISTRAR_NO_VERIFICADO_CUANDO_FALTE_EVIDENCIA"
+  ],
+  "criterio_candidato_fractal": "La misma relacion estructural debe ser demostrable en al menos dos escalas y conservar su identidad relacional.",
+  "estado": "V1_CONGELADO"
+}
