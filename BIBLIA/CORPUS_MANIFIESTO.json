@@ -1,0 +1,12 @@
+{
+  "id": "ALACRAN_CORPUS_MANIFIESTO_V1",
+  "corpus": "CORPUS_BIBLICO",
+  "estado": "PENDIENTE",
+  "texto_disponible_en_ALACRAN": false,
+  "formatos_aceptados": ["JSON", "JSONL", "CSV", "TXT"],
+  "requisito_minimo": ["book_id", "book", "chapter", "verse", "text"],
+  "regla_integridad": "El texto fuente no se modifica durante la ingesta; toda transformacion debe generar una representacion derivada y conservar la referencia de origen.",
+  "fuentes_no_autorizadas": "No incorporar automaticamente corpus externos ni mezclar ediciones sin declarar su procedencia.",
+  "proximo_estado": "LISTO_PARA_INGESTA",
+  "nota": "La arquitectura operativa ya puede ejecutarse cuando exista un corpus autorizado. No se simula analisis textual mientras el corpus este PENDIENTE."
+}
