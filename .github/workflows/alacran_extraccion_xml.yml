@@ -18,7 +18,10 @@ jobs:
 
       - name: Ejecutar extractor XML
         run: |
-          python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py
+          python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py \
+            BIBLIA/input/HebrewBible.xml \
+            BIBLIA/input/XML_MAPPING.json \
+            BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
 
       - name: Publicar resultados
         uses: actions/upload-artifact@v4
