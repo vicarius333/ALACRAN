@@ -1,0 +1,30 @@
+name: ALACRAN - Extracción XML
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract-xml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Ejecutar extractor XML
+        run: |
+          python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py
+
+      - name: Publicar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALACRAN-EXTRACCION-V1
+          path: |
+            BIBLIA/output/**
+            BIBLIA/input/**
+          if-no-files-found: warn
