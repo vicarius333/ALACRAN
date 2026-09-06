@@ -1,0 +1,16 @@
+{
+  "id": "ALACRAN_FUENTE_XML_BEBLIA_V1",
+  "tipo": "CORPUS_PRIMARIO",
+  "formato": "XML",
+  "nombre_archivo": "HebrewBible.xml",
+  "repositorio": "Beblia/Holy-Bible-XML-Format",
+  "ref": "master",
+  "url": "https://github.com/Beblia/Holy-Bible-XML-Format/blob/master/HebrewBible.xml",
+  "raw_url": "https://raw.githubusercontent.com/Beblia/Holy-Bible-XML-Format/master/HebrewBible.xml",
+  "sha": "923a3c4477fa467a070e8146a3574308f9900508",
+  "contenido_inspeccionado": false,
+  "estado_fuente": "IDENTIFICADA",
+  "estado_ingesta": "PENDIENTE",
+  "regla_integridad": "El XML fuente se trata como inmutable; toda normalizacion o extraccion genera datos derivados y conserva la referencia de origen.",
+  "restriccion": "No se asumen etiquetas XML antes de la inspeccion estructural."
+}
