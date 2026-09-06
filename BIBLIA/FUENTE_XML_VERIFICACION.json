@@ -1,0 +1,9 @@
+{
+  "id": "ALACRAN_FUENTE_XML_VERIFICACION_V1",
+  "algoritmo": "git-blob-sha1",
+  "formula": "SHA1(\"blob <bytes>\\0\" + contenido_binario)",
+  "sha_de_referencia": "923a3c4477fa467a070e8146a3574308f9900508",
+  "regla": "La ingesta solo continua si el Git blob SHA calculado coincide exactamente con el SHA declarado.",
+  "fallo": "Si no coincide, eliminar el archivo descargado y detener la cadena.",
+  "estado": "ACTIVO"
+}
