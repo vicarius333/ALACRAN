@@ -1,0 +1,50 @@
+name: ALACRAN - Hallazgos Estructurales V1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hallazgos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout ALACRAN
+        uses: actions/checkout@v4
+
+      - name: Descargar, extraer y validar
+        run: |
+          python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py \
+            BIBLIA/FUENTE_XML_MANIFIESTO.json \
+            BIBLIA/input/HebrewBible.xml
+          mkdir -p BIBLIA/output
+          python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py \
+            BIBLIA/input/HebrewBible.xml \
+            BIBLIA/input/XML_MAPPING.json \
+            BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
+          python 04_VALIDACION/ALACRAN_VALIDAR_EXTRACCION.py \
+            BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl \
+            > BIBLIA/output/VALIDACION_RESULTADO.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('BIBLIA/output/VALIDACION_RESULTADO.json').read_text())
+          if r.get('estado') != 'VALIDACION_APROBADA':
+              raise SystemExit('Validacion no aprobada')
+          PY
+
+      - name: Generar hallazgos estructurales
+        run: |
+          python 05_CIERRE/ALACRAN_HALLAZGOS_ESTRUCTURALES.py \
+            BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl \
+            BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
+
+      - name: Publicar hallazgos
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALACRAN-HALLAZGOS-ESTRUCTURALES-V1
+          path: BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
+          if-no-files-found: error
+          retention-days: 14
