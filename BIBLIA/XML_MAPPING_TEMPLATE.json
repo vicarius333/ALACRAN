@@ -1,0 +1,14 @@
+{
+  "id": "ALACRAN_XML_MAPPING_V1",
+  "source_id": "ALACRAN_FUENTE_XML_BEBLIA_V1",
+  "status": "PENDIENTE_INSPECCION",
+  "book_tag": null,
+  "chapter_tag": null,
+  "verse_tag": null,
+  "book_id_attribute": null,
+  "book_name_attribute": null,
+  "chapter_number_attribute": null,
+  "verse_number_attribute": null,
+  "regla": "Completar exclusivamente con etiquetas y atributos observados en XML_STRUCTURE_REPORT.json. No inferir ni inventar nombres.",
+  "validacion_requerida": ["libros_detectables", "capitulos_detectables", "unidades_detectables", "texto_no_vacio", "referencias_no_duplicadas"]
+}
