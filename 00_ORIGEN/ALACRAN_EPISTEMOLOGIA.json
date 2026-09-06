@@ -1,0 +1,37 @@
+{
+  "ALACRAN_EPISTEMOLOGIA": {
+    "proposito": "Convertir la estructura de la Biblia Fractal en un sistema reproducible de descubrimiento y auditoria de patrones.",
+    "principio": "Ninguna interpretacion puede ocupar el lugar del dato observado.",
+    "cadena": [
+      "DATO",
+      "RELACION",
+      "PATRON_OBSERVADO",
+      "INFERENCIA",
+      "HIPOTESIS"
+    ],
+    "niveles_de_evidencia": {
+      "DATO": "Observacion directamente extraida del corpus.",
+      "RELACION": "Vinculo verificable entre dos o mas datos.",
+      "PATRON_OBSERVADO": "Relacion recurrente detectada en mas de una unidad o escala.",
+      "INFERENCIA": "Consecuencia razonada a partir de datos y patrones observados.",
+      "HIPOTESIS": "Proposicion que requiere validacion adicional.",
+      "NO_VERIFICADO": "Afirmacion para la que aun no existe evidencia suficiente en el corpus."
+    },
+    "cada_hallazgo_debe_registrar": [
+      "id",
+      "tipo_evidencia",
+      "escala",
+      "ubicacion",
+      "elementos",
+      "relacion",
+      "frecuencia",
+      "transformacion",
+      "ausencias_relevantes",
+      "evidencia_fuente",
+      "estado_verificacion"
+    ],
+    "regla_fractal": "Un patron solo se considera candidato fractal cuando una misma relacion estructural puede demostrarse en mas de una escala sin alterar la definicion de la unidad.",
+    "regla_contra_sesgo": "No buscar primero una conclusion y despues seleccionar versos que la apoyen; primero extraer datos, luego comparar y finalmente formular hipotesis.",
+    "estado": "ACTIVO"
+  }
+}
