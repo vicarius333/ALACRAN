@@ -1,0 +1,68 @@
+name: ALACRAN - Auditoria Analisis V1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  auditoria-analisis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Descargar fuente XML
+        run: python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py BIBLIA/FUENTE_XML_MANIFIESTO.json BIBLIA/input/HebrewBible.xml
+
+      - name: Extraer XML
+        run: python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py BIBLIA/input/HebrewBible.xml BIBLIA/input/XML_MAPPING.json BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
+
+      - name: Validar extraccion
+        run: python 04_VALIDACION/ALACRAN_VALIDAR_EXTRACCION.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl BIBLIA/output/ALACRAN_VALIDACION_EXTRACCION_V1.json
+
+      - name: Cierre
+        run: python 05_CIERRE/ALACRAN_CIERRE.py
+
+      - name: Hallazgos estructurales
+        run: python 05_CIERRE/ALACRAN_HALLAZGOS_ESTRUCTURALES.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl BIBLIA/output/ALACRAN_HALLAZGOS_ESTRUCTURALES_V1.jsonl
+
+      - name: Auditar hallazgos
+        run: python 05_CIERRE/ALACRAN_AUDITAR_HALLAZGOS_ESTRUCTURALES.py BIBLIA/output/ALACRAN_HALLAZGOS_ESTRUCTURALES_V1.jsonl BIBLIA/output/ALACRAN_AUDITORIA_HALLAZGOS_ESTRUCTURALES_V1.json
+
+      - name: Transicion
+        run: python 06_TRANSICION/ALACRAN_TRANSICION.py
+
+      - name: Auditar transicion
+        run: python 06_TRANSICION/ALACRAN_AUDITAR_TRANSICION.py
+
+      - name: Retorno
+        run: python 07_RETORNO/ALACRAN_RETORNO.py
+
+      - name: Comparacion
+        run: python 08_COMPARACION/ALACRAN_COMPARACION.py
+
+      - name: Auditar comparacion
+        run: python 09_AUDITORIA/ALACRAN_AUDITAR_COMPARACION.py
+
+      - name: Grafo
+        run: python 10_GRAFO/ALACRAN_GRAFO.py
+
+      - name: Auditar grafo
+        run: python 11_AUDITORIA_GRAFO/ALACRAN_AUDITAR_GRAFO.py
+
+      - name: Analisis
+        run: python 12_ANALISIS/ALACRAN_ANALISIS.py
+
+      - name: Auditar analisis
+        run: python 13_AUDITORIA_ANALISIS/ALACRAN_AUDITAR_ANALISIS.py
+
+      - name: Publicar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALACRAN-AUDITORIA-ANALISIS-V1
+          path: |
+            BIBLIA/output/ALACRAN_ANALISIS_RESULTADO_V1.json
+            BIBLIA/output/ALACRAN_AUDITORIA_ANALISIS_V1.json
+          retention-days: 14
