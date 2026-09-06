@@ -1,0 +1,36 @@
+name: ALACRAN - Validación Extracción XML
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-extraction:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout ALACRAN
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Descargar y extraer XML
+        run: |
+          python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py \
+            BIBLIA/FUENTE_XML_MANIFIESTO.json \
+            BIBLIA/input/HebrewBible.xml
+          mkdir -p BIBLIA/output
+          python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py \
+            BIBLIA/input/HebrewBible.xml \
+            BIBLIA/input/XML_MAPPING.json \
+            BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
+
+      - name: Validar extracción
+        run: |
+          python 04_VALIDACION/ALACRAN_VALIDAR_EXTRACCION.py \
+            BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
