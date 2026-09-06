@@ -1,0 +1,30 @@
+{
+  "id": "ALACRAN_EXTRACTOR_XML_SPEC_V1",
+  "proposito": "Inspeccionar y posteriormente ingerir un corpus XML sin asumir previamente su estructura.",
+  "entrada": {
+    "formato": "XML",
+    "fuente": "BIBLIA/FUENTE_XML_MANIFIESTO.json",
+    "modo": "LOCAL"
+  },
+  "fase_1": {
+    "nombre": "INSPECCION_ESTRUCTURAL",
+    "objetivo": "Determinar estructura real del XML antes de definir el mapeo Biblia→libro→capitulo→unidad/versiculo→texto.",
+    "salida": "XML_STRUCTURE_REPORT.json",
+    "datos": ["root", "namespaces", "frecuencia_de_tags", "atributos", "rutas_de_elementos", "muestras_de_texto", "candidatos_estructurales"]
+  },
+  "restricciones": [
+    "NO_ASUMIR_TAGS",
+    "NO_INTERPRETAR_CONTENIDO",
+    "NO_MODIFICAR_FUENTE",
+    "NO_GENERAR_HALLAZGOS_EN_LA_INSPECCION",
+    "CONSERVAR_REFERENCIA_AL_ELEMENTO_ORIGEN"
+  ],
+  "fase_2": {
+    "nombre": "EXTRACCION_NORMALIZADA",
+    "condicion": "Solo despues de inspeccionar y validar el mapeo XML real.",
+    "entrada_adicional": "Configuracion de mapeo derivada del informe estructural",
+    "salida": "DATOS_BIBLICOS_NORMALIZADOS.jsonl",
+    "campos_minimos": ["book_id", "book", "chapter", "verse", "text", "source_id"]
+  },
+  "estado": "V1_CONGELADO"
+}
