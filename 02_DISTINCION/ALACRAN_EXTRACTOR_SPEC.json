@@ -1,0 +1,28 @@
+{
+  "id": "ALACRAN_EXTRACTOR_SPEC_V1",
+  "proposito": "Definir como ALACRAN recibe y transforma un corpus biblico sin imponer conclusiones semanticas.",
+  "entrada": {
+    "formato_preferente": ["JSON", "JSONL"],
+    "registro_minimo": ["book_id", "book", "chapter", "verse", "text"],
+    "metadatos_opcionales": ["language", "source_id", "edition", "corpus_version"]
+  },
+  "principio": "El extractor observa y registra; no interpreta ni formula hipotesis.",
+  "operaciones": [
+    "VALIDAR_REFERENCIA",
+    "PRESERVAR_TEXTO",
+    "NORMALIZAR_CODIFICACION",
+    "TOKENIZAR",
+    "REGISTRAR_REPETICIONES",
+    "REGISTRAR_POSICIONES",
+    "REGISTRAR_AUSENCIAS",
+    "CONSTRUIR_RELACIONES_OBSERVABLES"
+  ],
+  "unidad_textual": {
+    "regla": "Debe derivarse de señales observables del corpus.",
+    "prohibido": "Imponer unidades porque produzcan una hipotesis conveniente."
+  },
+  "salida": "DATOS_ESTRUCTURALES_RAW",
+  "evidencia": "Todo dato debe conservar referencia exacta al registro de origen.",
+  "estado": "V1_CONGELADO",
+  "corpus_actual": "PENDIENTE"
+}
