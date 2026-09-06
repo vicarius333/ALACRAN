@@ -1,0 +1,49 @@
+name: ALACRAN - Ingesta XML
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  ingest-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ALACRAN
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Descargar y verificar fuente
+        run: |
+          python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py \
+            BIBLIA/FUENTE_XML_MANIFIESTO.json \
+            BIBLIA/input/HebrewBible.xml
+
+      - name: Inspeccionar estructura XML
+        run: |
+          python 03_EJECUCION/ALACRAN_XML_INSPECTOR.py \
+            BIBLIA/input/HebrewBible.xml \
+            BIBLIA/input/XML_STRUCTURE_REPORT.json
+
+      - name: Construir mapeo candidato sin aprobarlo
+        run: |
+          python 03_EJECUCION/ALACRAN_XML_MAPPING_BUILDER.py \
+            BIBLIA/input/XML_STRUCTURE_REPORT.json \
+            BIBLIA/input/XML_MAPPING_CANDIDATE.json
+
+      - name: Publicar informe estructural
+        uses: actions/upload-artifact@v4
+        with:
+          name: alacran-xml-inspection
+          path: |
+            BIBLIA/input/XML_STRUCTURE_REPORT.json
+            BIBLIA/input/XML_MAPPING_CANDIDATE.json
+          if-no-files-found: error
+          retention-days: 14
