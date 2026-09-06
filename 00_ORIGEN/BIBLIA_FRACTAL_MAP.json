@@ -1,0 +1,47 @@
+{
+  "modelo": "BIBLIA_FRACTAL",
+  "proposito": "Mapa maestro estructural de toda la Biblia para ALACRAN.",
+  "regla_base": "La arquitectura del repositorio sigue la forma jerarquica del corpus biblico y se replica fractalmente hacia niveles inferiores.",
+  "jerarquia": [
+    "BIBLIA",
+    "BLOQUE",
+    "LIBRO",
+    "CAPITULO",
+    "UNIDAD",
+    "ELEMENTO",
+    "PALABRA",
+    "RAIZ",
+    "LETRA_OPERADOR"
+  ],
+  "bloques": {
+    "AT": {
+      "nombre": "ANTIGUO_TESTAMENTO",
+      "libros": [
+        "GENESIS","EXODO","LEVITICO","NUMEROS","DEUTERONOMIO","JOSUE","JUECES","RUT","1_SAMUEL","2_SAMUEL","1_REYES","2_REYES","1_CRONICAS","2_CRONICAS","ESDRAS","NEHEMIAS","ESTER","JOB","SALMOS","PROVERBIOS","ECLESIASTES","CANTAR_DE_LOS_CANTARES","ISAIAS","JEREMIAS","LAMENTACIONES","EZEQUIEL","DANIEL","OSEAS","JOEL","AMOS","ABDÍAS","JONAS","MIQUEAS","NAHUM","HABACUC","SOFONIAS","HAGEO","ZACARIAS","MALAQUIAS"
+      ],
+      "estado": "MAPA_CANONICO_INICIAL"
+    },
+    "NT": {
+      "nombre": "NUEVO_TESTAMENTO",
+      "libros": [
+        "MATEO","MARCOS","LUCAS","JUAN","HECHOS","ROMANOS","1_CORINTIOS","2_CORINTIOS","GALATAS","EFESIOS","FILIPENSES","COLOSENSES","1_TESALONICENSES","2_TESALONICENSES","1_TIMOTEO","2_TIMOTEO","TITO","FILEMON","HEBREOS","SANTIAGO","1_PEDRO","2_PEDRO","1_JUAN","2_JUAN","3_JUAN","JUDAS","APOCALIPSIS"
+      ],
+      "estado": "MAPA_CANONICO_INICIAL"
+    }
+  },
+  "unidad": {
+    "principio": "No se fija arbitrariamente.",
+    "derivacion": "Las unidades narrativas, poeticas, discursivas y semanticas se determinaran mediante señales internas del texto.",
+    "estado": "PENDIENTE_DE_EXTRACCION_TEXTUAL"
+  },
+  "fractalidad": {
+    "regla": "Cada nodo puede contener la misma arquitectura de ciclo operativo sin perder su identidad biblica.",
+    "ciclo": ["00_ORIGEN","01_MANDATO","02_DISTINCION","03_EJECUCION","04_VALIDACION","05_CIERRE","06_TRANSICION","07_RETORNO"]
+  },
+  "control": {
+    "texto": "SEPARADO_DE_ANALISIS",
+    "evidencia": "SEPARADA_DE_INTERPRETACION",
+    "hipotesis": "NO_SE_CONFUNDE_CON_DATO",
+    "fuente_primaria": "CORPUS_BIBLICO"
+  }
+}
