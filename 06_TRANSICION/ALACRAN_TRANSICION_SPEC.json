@@ -1,0 +1,10 @@
+{
+  "id": "ALACRAN_TRANSICION_SPEC_V1",
+  "proposito": "Transferir resultados entre escalas sin perder identidad ni referencia de origen.",
+  "escalas": ["BIBLIA", "BLOQUE", "LIBRO", "CAPITULO", "UNIDAD", "ELEMENTO", "PALABRA", "RAIZ", "LETRA_OPERADOR"],
+  "regla": "Una relacion observada en una escala puede proponerse para comparacion en otra, pero no se considera fractal hasta demostrar la misma relacion en ambas.",
+  "preservar": ["id_hallazgo", "referencia_origen", "relacion", "tipo_evidencia", "estado_verificacion"],
+  "prohibido": ["CAMBIAR_IDENTIDAD_DE_LA_RELACION", "OCULTAR_AUSENCIAS", "ELEVAR_INFERENCIA_A_HECHO"],
+  "salida": "CANDIDATO_COMPARABLE",
+  "estado": "V1_CONGELADO"
+}
