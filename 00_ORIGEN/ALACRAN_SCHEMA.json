@@ -1,0 +1,28 @@
+{
+  "ALACRAN": {
+    "principio": "Arquitectura fractal que reproduce la jerarquia de la Biblia",
+    "jerarquia": [
+      "BIBLIA",
+      "BLOQUE",
+      "LIBRO",
+      "CAPITULO",
+      "UNIDAD",
+      "ELEMENTO",
+      "PALABRA",
+      "RAIZ",
+      "LETRA_OPERADOR"
+    ],
+    "ciclo_recursivo": [
+      "00_ORIGEN",
+      "01_MANDATO",
+      "02_DISTINCION",
+      "03_EJECUCION",
+      "04_VALIDACION",
+      "05_CIERRE",
+      "06_TRANSICION",
+      "07_RETORNO"
+    ],
+    "regla": "Cada nivel conserva la misma logica estructural y puede contener el nivel siguiente sin romper la jerarquia superior.",
+    "restriccion": "La unidad textual debe derivarse de señales del texto y no imponerse por conveniencia."
+  }
+}
