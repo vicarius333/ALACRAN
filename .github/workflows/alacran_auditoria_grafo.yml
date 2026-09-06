@@ -1,0 +1,49 @@
+name: ALACRAN - Auditoría Grafo V1
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  auditoria_grafo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ALACRAN
+        uses: actions/checkout@v4
+
+      - name: Reconstruir cadena hasta grafo
+        run: |
+          python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py BIBLIA/FUENTE_XML_MANIFIESTO.json BIBLIA/input/HebrewBible.xml
+          mkdir -p BIBLIA/output
+          python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py BIBLIA/input/HebrewBible.xml BIBLIA/input/XML_MAPPING.json BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
+          python 04_VALIDACION/ALACRAN_VALIDAR_EXTRACCION.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl > BIBLIA/output/VALIDACION_RESULTADO.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('BIBLIA/output/VALIDACION_RESULTADO.json').read_text())
+          if r.get('estado') != 'VALIDACION_APROBADA': raise SystemExit('Validacion no aprobada')
+          PY
+          python 05_CIERRE/ALACRAN_CIERRE.py BIBLIA/output/VALIDACION_RESULTADO.json BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl BIBLIA/input/XML_MAPPING.json BIBLIA/FUENTE_XML_MANIFIESTO.json BIBLIA/output/ALACRAN_CIERRE_EXTRACCION_V1.json
+          python 05_CIERRE/ALACRAN_HALLAZGOS_ESTRUCTURALES.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
+          python 06_TRANSICION/ALACRAN_TRANSICION.py BIBLIA/output/ALACRAN_CIERRE_EXTRACCION_V1.json BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl BIBLIA/output/ALACRAN_TRANSICION_RESULTADO_V1.json
+          python 06_TRANSICION/ALACRAN_AUDITAR_TRANSICION.py BIBLIA/output/ALACRAN_TRANSICION_RESULTADO_V1.json > BIBLIA/output/AUDITORIA_TRANSICION_V1.json
+          python 07_RETORNO/ALACRAN_RETORNO.py BIBLIA/output/ALACRAN_TRANSICION_RESULTADO_V1.json BIBLIA/output/ALACRAN_RETORNO_RESULTADO_V1.json
+          python 08_COMPARACION/ALACRAN_COMPARACION.py BIBLIA/output/ALACRAN_RETORNO_RESULTADO_V1.json BIBLIA/output/ALACRAN_COMPARACION_RESULTADO_V1.json
+          python 09_AUDITORIA/ALACRAN_AUDITAR_COMPARACION.py BIBLIA/output/ALACRAN_COMPARACION_RESULTADO_V1.json BIBLIA/output/ALACRAN_AUDITORIA_COMPARACION_V1.json
+          python 10_GRAFO/ALACRAN_GRAFO.py BIBLIA/output/ALACRAN_COMPARACION_RESULTADO_V1.json BIBLIA/output/ALACRAN_AUDITORIA_COMPARACION_V1.json BIBLIA/output/ALACRAN_GRAFO_RESULTADO_V1.json
+
+      - name: Auditar grafo
+        run: |
+          python 11_AUDITORIA_GRAFO/ALACRAN_AUDITAR_GRAFO.py BIBLIA/output/ALACRAN_GRAFO_RESULTADO_V1.json BIBLIA/output/ALACRAN_AUDITORIA_GRAFO_V1.json
+
+      - name: Publicar auditoría del grafo
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALACRAN-AUDITORIA-GRAFO-V1
+          path: |
+            BIBLIA/output/ALACRAN_GRAFO_RESULTADO_V1.json
+            BIBLIA/output/ALACRAN_AUDITORIA_GRAFO_V1.json
+          if-no-files-found: error
+          retention-days: 14
