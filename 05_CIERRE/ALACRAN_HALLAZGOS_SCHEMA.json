@@ -1,0 +1,11 @@
+{
+  "id": "ALACRAN_HALLAZGOS_SCHEMA_V1",
+  "descripcion": "Contrato para registrar resultados sin confundir observacion con interpretacion.",
+  "cadena_epistemica": ["DATO", "RELACION", "PATRON_OBSERVADO", "INFERENCIA", "HIPOTESIS"],
+  "tipos_permitidos": ["HECHO", "DATO", "RELACION", "PATRON_OBSERVADO", "INFERENCIA", "HIPOTESIS", "NO_VERIFICADO"],
+  "campos_obligatorios": ["id", "tipo_evidencia", "escala", "ubicacion", "elementos", "relacion", "frecuencia", "transformacion", "ausencias_relevantes", "evidencia_fuente", "estado_verificacion"],
+  "regla_fractal": "Una candidatura fractal requiere la misma relacion estructural demostrada en al menos dos escalas, conservando su identidad relacional.",
+  "regla_antisesgo": "La hipotesis se formula despues de extraer y comparar datos; nunca se seleccionan datos para confirmar una conclusion previa.",
+  "estados_verificacion": ["VERIFICADO", "PARCIAL", "NO_VERIFICADO", "REFUTADO", "PENDIENTE"],
+  "estado": "V1_CONGELADO"
+}
