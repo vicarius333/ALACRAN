@@ -8,12 +8,11 @@ OUTPUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("BIBLIA/output/ALACRAN
 
 REQUIRED = {
     "id_hallazgo", "referencia_origen", "relacion", "tipo_evidencia",
-    "estado_verificacion", "escala_origen", "elementos", "frecuencia",
-    "transformacion", "ausencias_relevantes", "evidencia_fuente", "estado"
+    "estado_verificacion", "escala_origen", "escalas_objetivo_comparables",
+    "resultado"
 }
 
 errors = []
-
 if not INPUT.exists():
     errors.append(f"ARCHIVO_NO_ENCONTRADO: {INPUT}")
     data = {}
@@ -28,37 +27,37 @@ if data.get("id") != "ALACRAN_COMPARACION_RESULTADO_V1":
     errors.append("ID_RESULTADO_INVALIDO")
 if data.get("etapa") != "08_COMPARACION":
     errors.append("ETAPA_INVALIDA")
-if data.get("salida") != "CANDIDATO_SIN_DEMOSTRACION_MULTIESCALA":
-    errors.append("SALIDA_INVALIDA_O_FRACTALIDAD_INDEBIDA")
+if data.get("estado") != "COMPARACION_APROBADA":
+    errors.append("COMPARACION_NO_APROBADA")
 if data.get("fractalidad_declarada") is not False:
     errors.append("FRACTALIDAD_NO_DECLARADA_FALSE")
+if not isinstance(data.get("regla"), str) or not data.get("regla"):
+    errors.append("REGLA_AUSENTE")
 
-candidates = data.get("candidatos_comparacion", [])
-if not isinstance(candidates, list) or not candidates:
-    errors.append("SIN_CANDIDATOS_COMPARABLES")
-    candidates = []
+comparaciones = data.get("comparaciones", [])
+if not isinstance(comparaciones, list) or not comparaciones:
+    errors.append("SIN_COMPARACIONES")
+    comparaciones = []
 
 seen = set()
-for i, candidate in enumerate(candidates, 1):
-    if not isinstance(candidate, dict):
-        errors.append(f"CANDIDATO_{i}_NO_OBJETO")
+for i, item in enumerate(comparaciones, 1):
+    if not isinstance(item, dict):
+        errors.append(f"COMPARACION_{i}_NO_OBJETO")
         continue
-    missing = REQUIRED - set(candidate)
+    missing = REQUIRED - set(item)
     if missing:
-        errors.append(f"CANDIDATO_{i}_CAMPOS_FALTANTES:{','.join(sorted(missing))}")
-    cid = candidate.get("id_hallazgo")
+        errors.append(f"COMPARACION_{i}_CAMPOS_FALTANTES:{','.join(sorted(missing))}")
+        continue
+    cid = item.get("id_hallazgo")
     if cid in seen:
         errors.append(f"DUPLICADO_ID_HALLAZGO:{cid}")
-    if cid is not None:
-        seen.add(cid)
-    if candidate.get("tipo_evidencia") == "HIPOTESIS":
+    seen.add(cid)
+    if item.get("tipo_evidencia") == "HIPOTESIS":
         errors.append(f"HIPOTESIS_RECHAZADA:{cid}")
-    if candidate.get("estado") != "CANDIDATO_SIN_DEMOSTRACION_MULTIESCALA":
-        errors.append(f"ESTADO_CANDIDATO_INVALIDO:{cid}")
-    if not isinstance(candidate.get("ausencias_relevantes"), list):
-        errors.append(f"AUSENCIAS_NO_LISTA:{cid}")
-    if not candidate.get("evidencia_fuente"):
-        errors.append(f"SIN_EVIDENCIA_FUENTE:{cid}")
+    if item.get("resultado") != "CANDIDATO_SIN_DEMOSTRACION_MULTIESCALA":
+        errors.append(f"RESULTADO_INVALIDO:{cid}")
+    if not isinstance(item.get("escalas_objetivo_comparables"), list) or not item.get("escalas_objetivo_comparables"):
+        errors.append(f"ESCALAS_OBJETIVO_INVALIDAS:{cid}")
 
 result = {
     "id": "ALACRAN_AUDITORIA_COMPARACION_V1",
@@ -66,10 +65,10 @@ result = {
     "entrada": str(INPUT),
     "estado": "AUDITORIA_APROBADA" if not errors else "AUDITORIA_FALLIDA",
     "salida": "AUDITORIA_APROBADA" if not errors else "BLOQUEADO",
-    "candidatos_auditados": len(candidates),
+    "comparaciones_auditadas": len(comparaciones),
     "errores": errors,
     "fractalidad_declarada": False,
-    "regla": "La fractalidad solo puede declararse cuando la misma relacion estructural queda demostrada independientemente en al menos dos escalas.",
+    "regla": "La fractalidad solo puede declararse cuando la misma relacion estructural queda demostrada independientemente en al menos dos escalas."
 }
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
