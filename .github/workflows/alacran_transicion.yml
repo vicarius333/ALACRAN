@@ -51,12 +51,19 @@ jobs:
             BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl \
             BIBLIA/output/ALACRAN_TRANSICION_RESULTADO_V1.json
 
-      - name: Publicar transición
+      - name: Auditar transición
+        run: |
+          python 06_TRANSICION/ALACRAN_AUDITAR_TRANSICION.py \
+            BIBLIA/output/ALACRAN_TRANSICION_RESULTADO_V1.json \
+            > BIBLIA/output/AUDITORIA_TRANSICION_V1.json
+
+      - name: Publicar transición y auditoría
         uses: actions/upload-artifact@v4
         with:
           name: ALACRAN-TRANSICION-V1
           path: |
             BIBLIA/output/ALACRAN_TRANSICION_RESULTADO_V1.json
             BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
+            BIBLIA/output/AUDITORIA_TRANSICION_V1.json
           if-no-files-found: error
           retention-days: 14
