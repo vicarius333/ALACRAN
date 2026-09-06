@@ -1,0 +1,11 @@
+{
+  "id": "ALACRAN_RETORNO_SPEC_V1",
+  "proposito": "Retornar un hallazgo validado a escalas superiores para comprobar recurrencia, transformacion y estabilidad.",
+  "ciclo": ["OBSERVAR", "EXTRAER", "RELACIONAR", "COMPARAR", "VALIDAR", "REGISTRAR", "RETORNAR"],
+  "entrada": "HALLAZGO_VALIDADO_O_PARCIAL",
+  "acciones": ["SUBIR_ESCALA", "BUSCAR_RELACION_EQUIVALENTE", "COMPARAR_IDENTIDAD_RELACIONAL", "REGISTRAR_CONFIRMACION", "REGISTRAR_REFUTACION", "REGISTRAR_AUSENCIA"],
+  "criterio_de_retorno": "El retorno solo fortalece una candidatura cuando la relacion conserva su identidad y puede documentarse con referencias independientes del corpus.",
+  "resultado": ["REFUERZA_PATRON", "REFUTA_PATRON", "NO_CONCLUYENTE"],
+  "prohibido": "Usar el retorno para introducir retrospectivamente una conclusion no observada en los datos.",
+  "estado": "V1_CONGELADO"
+}
