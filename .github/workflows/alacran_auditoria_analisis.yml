@@ -20,7 +20,7 @@ jobs:
         run: python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py BIBLIA/input/HebrewBible.xml BIBLIA/input/XML_MAPPING.json BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
 
       - name: Validar extraccion
-        run: python 04_VALIDACION/ALACRAN_VALIDAR_EXTRACCION.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl BIBLIA/output/ALACRAN_VALIDACION_EXTRACCION_V1.json
+        run: python 04_VALIDACION/ALACRAN_VALIDAR_EXTRACCION.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
 
       - name: Cierre
         run: python 05_CIERRE/ALACRAN_CIERRE.py
