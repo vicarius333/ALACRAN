@@ -1,0 +1,38 @@
+{
+  "id": "ALACRAN_XML_MAPPING_BEBLIA_V1",
+  "source_id": "ALACRAN_FUENTE_XML_BEBLIA_V1",
+  "root_tag": "bible",
+  "testament_tag": "testament",
+  "book_tag": "book",
+  "chapter_tag": "chapter",
+  "verse_tag": "verse",
+  "book_id_attribute": "number",
+  "book_name_attribute": null,
+  "chapter_number_attribute": "number",
+  "verse_number_attribute": "number",
+  "text_source": "element_text_of_verse",
+  "evidence": {
+    "report": "BIBLIA/input/XML_STRUCTURE_REPORT.json",
+    "root_tag": "bible",
+    "paths": [
+      "bible/testament/book/chapter/verse"
+    ],
+    "counts": {
+      "book": 66,
+      "chapter": 1189,
+      "verse": 31103
+    },
+    "attributes": {
+      "book": ["number"],
+      "chapter": ["number"],
+      "verse": ["number"]
+    },
+    "verse_text_observed": true
+  },
+  "validation_status": "VALIDADO_ESTRUCTURALMENTE",
+  "restrictions": [
+    "No se asigna nombre de libro porque el XML inspeccionado no expone un atributo name en book.",
+    "El texto se obtiene del contenido textual del elemento verse mediante itertext().",
+    "No se incorpora interpretacion semantica durante la extraccion."
+  ]
+}
