@@ -1,0 +1,4 @@
+# ALACRAN local corpus input
+HebrewBible.xml
+*.xml
+*.xml.part
