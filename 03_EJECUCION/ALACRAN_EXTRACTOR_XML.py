@@ -8,6 +8,7 @@ inspeccion estructural. El extractor no inventa ni infiere etiquetas.
 import json
 import sys
 import xml.etree.ElementTree as ET
+from pathlib import Path
 
 
 def text_of(elem):
@@ -32,6 +33,7 @@ def extract(xml_path, mapping_path, output_path):
     current_chapter = None
     count = 0
 
+    Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as out:
         for event, elem in ET.iterparse(xml_path, events=('start', 'end')):
             if event == 'start':
