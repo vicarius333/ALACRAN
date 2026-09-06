@@ -41,10 +41,18 @@ jobs:
             BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl \
             BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
 
-      - name: Publicar hallazgos
+      - name: Auditar hallazgos estructurales
+        run: |
+          python 05_CIERRE/ALACRAN_AUDITAR_HALLAZGOS_ESTRUCTURALES.py \
+            BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl \
+            | tee BIBLIA/output/AUDITORIA_HALLAZGOS_ESTRUCTURALES_V1.json
+
+      - name: Publicar hallazgos y auditoría
         uses: actions/upload-artifact@v4
         with:
           name: ALACRAN-HALLAZGOS-ESTRUCTURALES-V1
-          path: BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
+          path: |
+            BIBLIA/output/HALLAZGOS_ESTRUCTURALES_V1.jsonl
+            BIBLIA/output/AUDITORIA_HALLAZGOS_ESTRUCTURALES_V1.json
           if-no-files-found: error
           retention-days: 14
