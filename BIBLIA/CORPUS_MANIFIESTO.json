@@ -1,12 +1,21 @@
 {
-  "id": "ALACRAN_CORPUS_MANIFIESTO_V1",
+  "id": "ALACRAN_CORPUS_MANIFIESTO_V2",
   "corpus": "CORPUS_BIBLICO",
-  "estado": "PENDIENTE",
+  "estado": "PENDIENTE_INGESTA",
   "texto_disponible_en_ALACRAN": false,
-  "formatos_aceptados": ["JSON", "JSONL", "CSV", "TXT"],
-  "requisito_minimo": ["book_id", "book", "chapter", "verse", "text"],
+  "fuente_primaria_registrada": "BIBLIA/FUENTE_XML_MANIFIESTO.json",
+  "formatos_aceptados": ["XML", "JSON", "JSONL", "CSV", "TXT"],
+  "requisito_minimo_normalizado": ["book_id", "book", "chapter", "verse", "text", "source_id"],
   "regla_integridad": "El texto fuente no se modifica durante la ingesta; toda transformacion debe generar una representacion derivada y conservar la referencia de origen.",
   "fuentes_no_autorizadas": "No incorporar automaticamente corpus externos ni mezclar ediciones sin declarar su procedencia.",
-  "proximo_estado": "LISTO_PARA_INGESTA",
-  "nota": "La arquitectura operativa ya puede ejecutarse cuando exista un corpus autorizado. No se simula analisis textual mientras el corpus este PENDIENTE."
+  "flujo": [
+    "FUENTE_PRIMARIA",
+    "INSPECCION_ESTRUCTURAL",
+    "MAPEO_EXPLICITO",
+    "EXTRACCION_NORMALIZADA",
+    "VALIDACION",
+    "CIERRE"
+  ],
+  "proximo_estado": "INSPECCION_ESTRUCTURAL",
+  "nota": "No se generan hallazgos ni se declara el corpus disponible hasta completar inspeccion, mapeo y validacion."
 }
