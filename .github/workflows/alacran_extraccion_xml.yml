@@ -3,12 +3,15 @@ name: ALACRAN - Extracción XML
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   extract-xml:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout ALACRAN
         uses: actions/checkout@v4
 
       - name: Configurar Python
@@ -16,18 +19,24 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Descargar y verificar fuente
+        run: |
+          python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py \
+            BIBLIA/FUENTE_XML_MANIFIESTO.json \
+            BIBLIA/input/HebrewBible.xml
+
       - name: Ejecutar extractor XML
         run: |
+          mkdir -p BIBLIA/output
           python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py \
             BIBLIA/input/HebrewBible.xml \
             BIBLIA/input/XML_MAPPING.json \
             BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
 
-      - name: Publicar resultados
+      - name: Publicar extracción
         uses: actions/upload-artifact@v4
         with:
           name: ALACRAN-EXTRACCION-V1
-          path: |
-            BIBLIA/output/**
-            BIBLIA/input/**
-          if-no-files-found: warn
+          path: BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
+          if-no-files-found: error
+          retention-days: 14
