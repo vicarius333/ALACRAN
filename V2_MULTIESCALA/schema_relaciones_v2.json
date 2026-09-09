@@ -4,29 +4,9 @@
   "interpretacion": false,
   "fractalidad_declarada": false,
   "escalas": ["S1_palabra", "S2_verso", "S3_bloque", "S4_capitulo", "S5_bloque_mayor", "S6_libro"],
-  "required_fields": [
-    "id_relacion",
-    "escala",
-    "unidad",
-    "elemento_a",
-    "operacion",
-    "elemento_b",
-    "posicion",
-    "frecuencia",
-    "distancia",
-    "direccion",
-    "patron",
-    "estado"
-  ],
-  "estados_permitidos": [
-    "RELACION_DETECTADA",
-    "RELACION_REPETIDA",
-    "RELACION_MULTIESCALA",
-    "NO_CONFIRMADA"
-  ],
-  "criterio_multiescala": {
-    "min_escalas_distintas": 2,
-    "misma_relacion": true,
-    "interpretacion_semantica": false
-  }
+  "required_fields": ["id_relacion", "escala", "unidad", "elemento_a", "operacion", "elemento_b", "posicion", "frecuencia", "distancia", "direccion", "patron", "identidad", "estado"],
+  "estados_permitidos": ["RELACION_DETECTADA", "RELACION_REPETIDA", "RELACION_MULTIESCALA", "NO_CONFIRMADA"],
+  "criterio_multiescala": {"min_escalas_distintas": 2, "misma_relacion": true, "identidad_exacta_requerida": true, "interpretacion_semantica": false},
+  "familia_multiescala_candidata": {"permitida": true, "es_equivalencia": false, "requiere_validacion_posterior": true},
+  "fractalidad": {"campo_resultado": "es_fractal", "valor_permitido_en_v2": false}
 }
