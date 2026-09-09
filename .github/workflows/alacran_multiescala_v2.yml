@@ -1,0 +1,36 @@
+name: ALACRAN - Deteccion Multiescala V2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  multiescala-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout V2
+        uses: actions/checkout@v4
+
+      - name: Descargar fuente XML
+        run: python 03_EJECUCION/ALACRAN_DOWNLOAD_XML.py BIBLIA/FUENTE_XML_MANIFIESTO.json BIBLIA/input/HebrewBible.xml
+
+      - name: Extraer XML
+        run: python 03_EJECUCION/ALACRAN_EXTRACTOR_XML.py BIBLIA/input/HebrewBible.xml BIBLIA/input/XML_MAPPING.json BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl
+
+      - name: Detectar y medir V2
+        run: python V2_MULTIESCALA/ALACRAN_V2_DETECTOR.py BIBLIA/output/DATOS_BIBLICOS_NORMALIZADOS.jsonl BIBLIA/output/ALACRAN_MULTIESCALA_RESULTADO_V2.json
+
+      - name: Auditar V2
+        run: python V2_MULTIESCALA/ALACRAN_V2_AUDIT.py BIBLIA/output/ALACRAN_MULTIESCALA_RESULTADO_V2.json BIBLIA/output/ALACRAN_AUDITORIA_MULTIESCALA_V2.json
+
+      - name: Publicar resultados V2
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALACRAN-MULTIESCALA-V2
+          path: |
+            BIBLIA/output/ALACRAN_MULTIESCALA_RESULTADO_V2.json
+            BIBLIA/output/ALACRAN_AUDITORIA_MULTIESCALA_V2.json
+          if-no-files-found: error
+          retention-days: 14
