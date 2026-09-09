@@ -7,30 +7,35 @@ FRACTALIDAD: NO DECLARADA
 V1: INTACTA
 
 ## Regla de V2
-Una relación solo puede considerarse **multiescala** si la misma relación estructural es detectada y medida en al menos dos escalas distintas.
+Una relación solo puede considerarse `RELACION_MULTIESCALA` si la misma relación observable aparece en al menos dos escalas distintas.
 
-La detección multiescala no constituye por sí misma una demostración de fractalidad.
+En esta implementación, identidad suficiente significa conservar exactamente la identidad estructural registrada. No se inventa equivalencia semántica entre elementos distintos.
 
-## Escalas iniciales
+Cuando varias escalas comparten solo una familia abstracta (`SIGUE`, `CONTIENE`), se registra como `familia_multiescala_candidata` y requiere una fase posterior de validación funcional/semántica. No se convierte automáticamente en `RELACION_MULTIESCALA`.
+
+## Escalas
 - S1: palabra / forma
 - S2: verso
-- S3: bloque de versos
+- S3: bloque de versos (5 versos)
 - S4: capítulo
-- S5: bloque mayor
+- S5: bloque mayor (5 capítulos)
 - S6: libro
 
+Los tamaños 5 son parámetros operativos iniciales y no constituyen una afirmación sobre la estructura del corpus.
+
 ## Estados permitidos
-- RELACION_DETECTADA
-- RELACION_REPETIDA
-- RELACION_MULTIESCALA
-- NO_CONFIRMADA
+- `RELACION_DETECTADA`
+- `RELACION_REPETIDA`
+- `RELACION_MULTIESCALA`
+- `NO_CONFIRMADA`
 
-No se permite producir como resultado de esta fase una conclusión `ES_FRACTAL`.
+## Prohibiciones
+- No interpretación semántica.
+- No inferencia de intención del autor.
+- No equivalencia funcional inventada.
+- No conclusión `ES_FRACTAL`.
 
-## Principio de auditoría
-Separar estrictamente:
-1. detección;
-2. medición;
-3. comparación entre escalas;
-4. auditoría;
-5. interpretación posterior.
+## Flujo
+`FUENTE → DETECCIÓN → MEDICIÓN → COMPARACIÓN → AUDITORÍA`
+
+La interpretación queda fuera de V2.
