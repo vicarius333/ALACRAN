@@ -1,0 +1,5 @@
+# Raw/derived corpus is downloaded locally or produced by CI; do not commit it.
+SOURCE/
+VERIFICATION.json
+STRUCTURAL_INSPECTION.json
+*.part
