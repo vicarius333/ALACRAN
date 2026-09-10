@@ -1,0 +1,21 @@
+{
+  "source_id": "ALACRAN_FUENTE_GEEZ_ETHIOPIAN_BIBLE_V1",
+  "status": "CANDIDATO_PRIMARIO_NO_VALIDADO",
+  "repository": "cpradmin/ethiopian-bible",
+  "repository_url": "https://github.com/cpradmin/ethiopian-bible",
+  "source_path": "data/geez-complete.md",
+  "raw_url": "https://raw.githubusercontent.com/cpradmin/ethiopian-bible/master/data/geez-complete.md",
+  "source_git_blob_sha": "2740ced68033559a8f4eccff0ca3302a22befeba",
+  "git_blob_sha": "2740ced68033559a8f4eccff0ca3302a22befeba",
+  "sha256": "PENDIENTE_DE_VERIFICACION_LOCAL",
+  "primary_layer": "Ge'ez manuscript text",
+  "derived_layers_excluded_from_primary": [
+    "transliteration",
+    "english comparison",
+    "word glosses",
+    "project theological claims"
+  ],
+  "integrity_rule": "No interpretation or theological translation enters the primary corpus.",
+  "validation_rule": "The source remains CANDIDATO_PRIMARIO_NO_VALIDADO until local download, hash verification and structural inspection are completed.",
+  "provenance_note": "Source metadata and project claims are preserved as claims of the upstream repository, not as ALACRAN conclusions."
+}
