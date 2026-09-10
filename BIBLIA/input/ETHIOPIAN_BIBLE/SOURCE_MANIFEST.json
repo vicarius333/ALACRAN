@@ -7,7 +7,7 @@
   "raw_url": "https://raw.githubusercontent.com/cpradmin/ethiopian-bible/master/data/geez-complete.md",
   "source_git_blob_sha": "2740ced68033559a8f4eccff0ca3302a22befeba",
   "git_blob_sha": "2740ced68033559a8f4eccff0ca3302a22befeba",
-  "sha256": "PENDIENTE_DE_VERIFICACION_LOCAL",
+  "sha256": "GENERADO_DURANTE_LA_INGESTA_LOCAL",
   "primary_layer": "Ge'ez manuscript text",
   "derived_layers_excluded_from_primary": [
     "transliteration",
