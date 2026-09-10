@@ -1,0 +1,40 @@
+name: ALACRAN - Verificación Fuente Ge'ez
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '03_EJECUCION/ALACRAN_DOWNLOAD_ETHIOPIAN_BIBLE.py'
+      - '03_EJECUCION/ALACRAN_INSPECT_ETHIOPIAN_GEEZ.py'
+      - 'BIBLIA/input/ETHIOPIAN_BIBLE/SOURCE_MANIFEST.json'
+
+jobs:
+  verify-geez-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ALACRAN
+        uses: actions/checkout@v4
+
+      - name: Verify Python
+        run: python3 --version
+
+      - name: Download and verify source
+        run: |
+          python3 03_EJECUCION/ALACRAN_DOWNLOAD_ETHIOPIAN_BIBLE.py
+
+      - name: Inspect Ge'ez without interpretation
+        run: |
+          python3 03_EJECUCION/ALACRAN_INSPECT_ETHIOPIAN_GEEZ.py
+
+      - name: Show verification results
+        run: |
+          cat BIBLIA/input/ETHIOPIAN_BIBLE/VERIFICATION.json
+          cat BIBLIA/input/ETHIOPIAN_BIBLE/STRUCTURAL_INSPECTION.json
+
+      - name: Preserve verification artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ALACRAN-GEEZ-verification
+          path: |
+            BIBLIA/input/ETHIOPIAN_BIBLE/VERIFICATION.json
+            BIBLIA/input/ETHIOPIAN_BIBLE/STRUCTURAL_INSPECTION.json
